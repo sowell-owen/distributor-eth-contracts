@@ -1,1 +1,1 @@
-export const DEPLOY_LOCK = "deploy-lock";
+export const DEPLOY_DISTRIBUTOR = "deploy-distributor";

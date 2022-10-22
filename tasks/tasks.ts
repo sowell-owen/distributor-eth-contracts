@@ -1,18 +1,19 @@
-import { task, types } from "hardhat/config";
-import { HardhatRuntimeEnvironment } from "hardhat/types";
+import { task } from "hardhat/config";
+import type { HardhatRuntimeEnvironment } from "hardhat/types";
 
-import { DEPLOY_LOCK } from "./task-names";
-import { preAction } from "./utils";
+import { DEPLOY_DISTRIBUTOR } from "./task-names";
 
-import { Lock__factory } from "../typechain-types";
+import { log } from "../helpers/log";
+import { Distributor__factory } from "../typechain-types";
 
-task(DEPLOY_LOCK)
-  .addParam("unlockTime", "Tokens unlock time", 0, types.int)
-  .setAction(async (params, hre: HardhatRuntimeEnvironment) => {
-    await preAction(hre);
+task(DEPLOY_DISTRIBUTOR).setAction(
+  async (_, hre: HardhatRuntimeEnvironment) => {
     const [signer] = await hre.ethers.getSigners();
+    log.preDeploy("Distributor");
 
-    const factory = new Lock__factory(signer);
-    const lock = await factory.deploy(params.unlockTime);
-    await lock.deployed();
-  });
+    const factory = new Distributor__factory(signer);
+    const distributor = await factory.deploy();
+    await distributor.deployed();
+    log.deploy("Distributor", distributor.address);
+  }
+);
