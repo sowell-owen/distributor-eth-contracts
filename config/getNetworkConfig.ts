@@ -1,5 +1,5 @@
 import { getEnvVars } from "./getEnvVars";
-import { NetworkConfig, Networks } from "./types";
+import type { NetworkConfig, Networks } from "./types";
 
 const { ALCHEMY_KEY, INFURA_KEY, PRIVATE_KEY } = getEnvVars();
 

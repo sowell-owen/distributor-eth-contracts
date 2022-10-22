@@ -1,6 +1,6 @@
 import * as dotenv from "dotenv";
 
-import { EnvVars } from "./types";
+import type { EnvVars } from "./types";
 dotenv.config();
 
 export const getEnvVars = (): EnvVars => {
